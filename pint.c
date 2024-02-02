@@ -1,10 +1,39 @@
 #include "monty.h"
+
 /**
- * f_pint - prints the top
- * @head: stack head
- * @counter: line_number
- * Return: no return
-*/
+ * f_pop - print top node on stack
+ * @head: pointer to pointer of first node
+ * @counter: line counter
+ *
+ * Return: none
+ */
+
+void f_pop(stack_t **head, unsigned int counter)
+{
+	stack_t *h;
+
+	if (*head == NULL)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
+
+	h = *head;
+	*head = h->next;
+	free(h);
+}
+
+/**
+ * f_pint - print top node on stack
+ * @head: pointer to pointer of first node
+ * @counter: line counter
+ *
+ * Return: none
+ */
+
 void f_pint(stack_t **head, unsigned int counter)
 {
 	if (*head == NULL)
@@ -15,5 +44,20 @@ void f_pint(stack_t **head, unsigned int counter)
 		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
+
 	printf("%d\n", (*head)->n);
+}
+
+/**
+ * f_nop - do nothing
+ * @head: pointer to pointer of first node
+ * @counter: line counter
+ *
+ * Return: none
+ */
+
+void f_nop(stack_t **head, unsigned int counter)
+{
+	(void) counter;
+	(void) head;
 }
